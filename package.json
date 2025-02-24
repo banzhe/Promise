@@ -29,6 +29,7 @@
     "types": "workspace:*",
     "typescript": "catalog:",
     "unbuild": "catalog:",
+    "unocss": "^66.0.0",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
