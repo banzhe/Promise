@@ -12,12 +12,12 @@ const GUIDES: DefaultTheme.NavItemWithLink[] = [
 
 const VERSIONS: (DefaultTheme.NavItemWithLink | DefaultTheme.NavItemChildren)[] = [
   { text: `v${version} (current)`, link: '/' },
-  { text: `Release Notes`, link: 'https://github.com/antfu/pkg-placeholder/releases' },
-  { text: `Contributing`, link: 'https://github.com/antfu/pkg-placeholder/blob/main/CONTRIBUTING.md' },
+  { text: `Release Notes`, link: 'https://github.com/antfu/types/releases' },
+  { text: `Contributing`, link: 'https://github.com/antfu/types/blob/main/CONTRIBUTING.md' },
 ]
 
 export default defineConfig({
-  title: 'pkg-placeholder',
+  title: 'types',
   description: '_description_',
   markdown: {
     theme: {
@@ -59,7 +59,7 @@ export default defineConfig({
       ],
     },
     editLink: {
-      pattern: 'https://github.com/antfu/pkg-placeholder/edit/main/docs/:path',
+      pattern: 'https://github.com/antfu/types/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
     search: {
@@ -67,7 +67,7 @@ export default defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/antfu/pkg-placeholder' },
+      { icon: 'github', link: 'https://github.com/antfu/types' },
     ],
 
     footer: {

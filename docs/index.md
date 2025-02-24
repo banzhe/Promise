@@ -2,7 +2,7 @@
 layout: home
 
 hero:
-  name: "pkg-placeholder"
+  name: "types"
   actions:
     - theme: brand
       text: Get Started

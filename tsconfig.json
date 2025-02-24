@@ -1,17 +1,27 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["ESNext"],
+    "jsx": "react-jsx",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "pkg-placeholder": ["./packages/pkg-placeholder/src/index.ts"]
+      "types": [
+        "./packages/types/src/index.ts"
+      ]
     },
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,
     "noEmit": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "isolatedModules": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   }
