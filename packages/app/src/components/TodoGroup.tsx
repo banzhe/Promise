@@ -1,6 +1,5 @@
 import type { TodoTask } from '../types/task'
-import { IonCard, IonCardContent, IonCardHeader, IonIcon, IonLabel, IonList } from '@ionic/react'
-import { chevronDownOutline, chevronUpOutline } from 'ionicons/icons'
+import { Button, Card, CardHeader, Text } from '@fluentui/react-components'
 import React, { useState } from 'react'
 import TodoItem from './TodoItem'
 
@@ -17,27 +16,23 @@ const TodoGroup: React.FC<TodoGroupProps> = ({ taskList, groupTitle }) => {
   }
 
   return (
-    <IonCard>
-      <IonCardHeader>
+    <Card>
+      <CardHeader>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <IonLabel>{groupTitle}</IonLabel>
-          <IonIcon
-            icon={isCollapsed ? chevronDownOutline : chevronUpOutline}
-            onClick={toggleCollapse}
-            style={{ cursor: 'pointer' }}
-          />
+          <Text>{groupTitle}</Text>
+          <Button onClick={toggleCollapse} aria-label="Toggle collapse">
+            {isCollapsed ? 'Expand' : 'Collapse'}
+          </Button>
         </div>
-      </IonCardHeader>
-      <IonCardContent>
-        { !isCollapsed && (
-          <IonList lines="full">
-            {taskList.map((todo, index) => (
-              <TodoItem key={index} task={todo}></TodoItem>
-            ))}
-          </IonList>
-        )}
-      </IonCardContent>
-    </IonCard>
+      </CardHeader>
+      {!isCollapsed && (
+        <ul>
+          {taskList.map((todo, index) => (
+            <TodoItem key={index} task={todo} />
+          ))}
+        </ul>
+      )}
+    </Card>
   )
 }
 

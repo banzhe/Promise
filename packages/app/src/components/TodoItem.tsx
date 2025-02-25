@@ -1,5 +1,5 @@
 import type { TodoTask } from '../types/task'
-import { IonCheckbox, IonItem } from '@ionic/react'
+import { Checkbox, ListItem } from '@fluentui/react-components'
 import React from 'react'
 
 interface TodoItemProps {
@@ -9,10 +9,10 @@ interface TodoItemProps {
 const TodoItem: React.FC<TodoItemProps> = ({ task }) => {
   const isFinished = task.status === 'completed'
   return (
-    <IonItem>
-      <IonCheckbox slot="start" checked={isFinished} />
+    <ListItem>
+      <Checkbox checked={isFinished} />
       {task.title}
-    </IonItem>
+    </ListItem>
   )
 }
 
