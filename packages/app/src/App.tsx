@@ -13,7 +13,7 @@ import { ellipse, square, triangle } from 'ionicons/icons'
 import { Redirect, Route } from 'react-router-dom'
 import Calendar from './pages/Calendar'
 import Config from './pages/Config'
-import List from './pages/List'
+import Todo from './pages/Todo'
 import Tomato from './pages/Tomato'
 
 /* Core CSS required for Ionic components to work properly */
@@ -54,7 +54,7 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/list">
-            <List />
+            <Todo />
           </Route>
           <Route exact path="/calendar">
             <Calendar />
@@ -72,7 +72,7 @@ const App: React.FC = () => (
         <IonTabBar slot="bottom">
           <IonTabButton tab="list" href="/list">
             <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>List</IonLabel>
+            <IonLabel>Todo</IonLabel>
           </IonTabButton>
           <IonTabButton tab="calendar" href="/calendar">
             <IonIcon aria-hidden="true" icon={ellipse} />
