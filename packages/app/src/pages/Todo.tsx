@@ -3,39 +3,72 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/rea
 import { useState } from 'react'
 import TodoList from '../components/TodoList'
 
+const mockTaskList = [
+  {
+    id: '0',
+    title: 'Task 0',
+    group: 'uncategorized',
+    status: 'incomplete' as const,
+    createdTime: new Date('2021-01-01'),
+    sort: 0,
+  },
+  {
+    id: '1',
+    title: 'Task 1',
+    group: 'group1',
+    status: 'incomplete' as const,
+    createdTime: new Date('2021-01-01'),
+    sort: 1,
+  },
+  {
+    id: '2',
+    title: 'Task 2',
+    group: 'group1',
+    status: 'incomplete' as const,
+    createdTime: new Date('2021-01-01'),
+    sort: 2,
+  },
+  {
+    id: '3',
+    title: 'Task 3',
+    group: 'group2',
+    status: 'incomplete' as const,
+    createdTime: new Date('2021-01-01'),
+    sort: 3,
+  },
+]
+
+const mockGroupList = [
+  {
+    id: 'uncategorized',
+    title: 'Uncategorized',
+    sort: 0,
+  },
+  {
+    id: 'group1',
+    title: 'Group 1',
+    sort: 1,
+  },
+  {
+    id: 'group2',
+    title: 'Group 2',
+    sort: 2,
+  },
+  {
+    id: 'completed',
+    title: 'Completed',
+    sort: 3,
+  },
+]
+
 const Todo: React.FC = () => {
-  const [taskList, setTaskList] = useState<TodoTask[]>([
-    {
-      title: 'Task 0',
-      status: 'incomplete' as const,
-      createdTime: new Date('2021-01-01'),
-    },
-    {
-      title: 'Task 1',
-      group: 'group1',
-      status: 'incomplete' as const,
-      createdTime: new Date('2021-01-01'),
-    },
-    {
-      title: 'Task 2',
-      group: 'group1',
-      status: 'incomplete' as const,
-      createdTime: new Date('2021-01-01'),
-    },
-    {
-      title: 'Task 3',
-      group: 'group2',
-      status: 'incomplete' as const,
-      createdTime: new Date('2021-01-01'),
-    },
-  ])
+  const [taskList, setTaskList] = useState<TodoTask[]>(mockTaskList)
+  const [groupList] = useState(mockGroupList)
 
   function handleToggleTask(toggledTask: TodoTask): void {
     setTaskList(prevTaskList =>
       prevTaskList.map(task =>
-        // 假设任务可以通过title和createdTime唯一标识
-        task.title === toggledTask.title
-        && task.createdTime.getTime() === toggledTask.createdTime.getTime()
+        task.id === toggledTask.id
           ? {
               ...task,
               status: task.status === 'completed' ? 'incomplete' : 'completed',
@@ -53,7 +86,12 @@ const Todo: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <TodoList taskList={taskList} onToggleTask={handleToggleTask}></TodoList>
+        <TodoList
+          taskList={taskList}
+          onToggleTask={handleToggleTask}
+          groupList={groupList}
+        >
+        </TodoList>
       </IonContent>
     </IonPage>
   )

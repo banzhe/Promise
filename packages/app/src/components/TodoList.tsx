@@ -1,41 +1,27 @@
-import type { TodoTask } from '../types/task'
+import type { TodoGroupI, TodoTask } from '../types/task'
 import TodoGroup from './TodoGroup'
 
-function groupTaskList(taskList: TodoTask[]): Array<{
-  groupTitle: string
-  taskList: TodoTask[]
-}> {
-  const recordObject = taskList.reduce((acc, task) => {
-    // todo use group id
-    const group = task.status === 'completed' ? 'complete' : task.group ?? 'default'
-    if (!acc[group]) {
-      acc[group] = []
-    }
-    acc[group].push(task)
-    return acc
-  }, {
-    complete: [],
-  } as Record<string, TodoTask[]>)
-
-  return Object.entries(recordObject).map(([groupTitle, taskList]) => ({
-    groupTitle,
-    taskList,
+function groupTaskList(taskList: TodoTask[], groupList: TodoGroupI[]): Array<TodoGroupI & { taskList: TodoTask[] }> {
+  return groupList.map(group => ({
+    ...group,
+    taskList: taskList.filter(task => (task.group === group.id && task.status !== 'completed') || (group.id === 'completed' && task.status === 'completed')),
   }))
 }
 
 interface TodoListProps {
   taskList: TodoTask[]
+  groupList: TodoGroupI[]
   onToggleTask?: (task: TodoTask) => void
 }
 
-const TodoList: React.FC<TodoListProps> = ({ taskList, onToggleTask }) => {
-  const groupList = groupTaskList(taskList)
+const TodoList: React.FC<TodoListProps> = ({ taskList, onToggleTask, groupList }) => {
+  const taskGroupList = groupTaskList(taskList, groupList)
   return (
     <div className="p-sm space-y-sm bg-[var(--colorNeutralBackground2)] h-full">
-      {groupList.map(group => (
+      {taskGroupList.map(group => (
         <TodoGroup
-          key={group.groupTitle}
-          groupTitle={group.groupTitle}
+          key={group.id}
+          groupTitle={group.title}
           taskList={group.taskList}
           onToggleTask={onToggleTask}
         >
