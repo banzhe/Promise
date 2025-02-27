@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@fluentui/react-components": "^9.60.0",
+    "@fluentui/react-icons": "^2.0.274",
+    "@fluentui/react-motion-components-preview": "^0.4.3",
     "@ionic/react": "^8.0.0",
     "@ionic/react-router": "^8.0.0",
     "@types/react-router": "^5.1.20",

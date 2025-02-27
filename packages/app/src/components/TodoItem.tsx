@@ -4,14 +4,22 @@ import React from 'react'
 
 interface TodoItemProps {
   task: TodoTask
+  onToggle?: (task: TodoTask) => void
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ task }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ task, onToggle }) => {
   const isFinished = task.status === 'completed'
   return (
     <ListItem>
-      <Checkbox checked={isFinished} />
-      {task.title}
+      <Checkbox
+        checked={isFinished}
+        label={<span className={isFinished ? 'line-through color-[var(--colorNeutralForegroundDisabled)]' : ''}>{task.title}</span>}
+        onChange={() => {
+          if (onToggle) {
+            onToggle(task)
+          }
+        }}
+      />
     </ListItem>
   )
 }

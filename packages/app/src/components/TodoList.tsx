@@ -13,7 +13,9 @@ function groupTaskList(taskList: TodoTask[]): Array<{
     }
     acc[group].push(task)
     return acc
-  }, {} as Record<string, TodoTask[]>)
+  }, {
+    complete: [],
+  } as Record<string, TodoTask[]>)
 
   return Object.entries(recordObject).map(([groupTitle, taskList]) => ({
     groupTitle,
@@ -23,17 +25,19 @@ function groupTaskList(taskList: TodoTask[]): Array<{
 
 interface TodoListProps {
   taskList: TodoTask[]
+  onToggleTask?: (task: TodoTask) => void
 }
 
-const TodoList: React.FC<TodoListProps> = ({ taskList }) => {
+const TodoList: React.FC<TodoListProps> = ({ taskList, onToggleTask }) => {
   const groupList = groupTaskList(taskList)
   return (
-    <div>
+    <div className="p-sm space-y-sm bg-[var(--colorNeutralBackground2)] h-full">
       {groupList.map(group => (
         <TodoGroup
           key={group.groupTitle}
           groupTitle={group.groupTitle}
           taskList={group.taskList}
+          onToggleTask={onToggleTask}
         >
         </TodoGroup>
       ))}
