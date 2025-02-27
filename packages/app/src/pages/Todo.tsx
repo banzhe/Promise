@@ -1,6 +1,9 @@
 import type { TodoTask } from '../types/task'
+import { Button } from '@fluentui/react-components'
+import { AddFilled } from '@fluentui/react-icons'
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import { useState } from 'react'
+import TodoAddDrawer from '../components/TodoAddDrawer'
 import TodoList from '../components/TodoList'
 
 const mockTaskList = [
@@ -64,6 +67,7 @@ const mockGroupList = [
 const Todo: React.FC = () => {
   const [taskList, setTaskList] = useState<TodoTask[]>(mockTaskList)
   const [groupList] = useState(mockGroupList)
+  const [showAddInput, setShowAddInput] = useState(false)
 
   function handleToggleTask(toggledTask: TodoTask): void {
     setTaskList(prevTaskList =>
@@ -76,6 +80,22 @@ const Todo: React.FC = () => {
           : task,
       ),
     )
+  }
+
+  function handleAddTask(): void {
+    setShowAddInput(true)
+  }
+
+  function handleSaveTask(title: string): void {
+    const newTask: TodoTask = {
+      id: Date.now().toString(),
+      title,
+      group: 'uncategorized',
+      status: 'incomplete',
+      createdTime: new Date(),
+      sort: taskList.length,
+    }
+    setTaskList(prevList => [...prevList, newTask])
   }
 
   return (
@@ -92,6 +112,22 @@ const Todo: React.FC = () => {
           groupList={groupList}
         >
         </TodoList>
+
+        <TodoAddDrawer
+          open={showAddInput}
+          onOpenChange={setShowAddInput}
+          onAddTask={handleSaveTask}
+        />
+
+        <Button
+          className="fixed bottom-4 right-4"
+          onClick={handleAddTask}
+          shape="circular"
+          size="large"
+          appearance="primary"
+          icon={<AddFilled />}
+        >
+        </Button>
       </IonContent>
     </IonPage>
   )
